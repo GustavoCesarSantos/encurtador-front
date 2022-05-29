@@ -1,21 +1,35 @@
 {
-  "name": "encurtador-front",
-  "private": true,
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^1.3.0",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.9"
-  }
+    "name": "encurtador-front",
+    "private": true,
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "lint:format": "prettier  --loglevel warn --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+        "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+        "lint": "npm run lint:format && npm run lint:fix ",
+        "type-check": "tsc"
+    },
+    "dependencies": {
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.9",
+        "@types/react-dom": "^18.0.5",
+        "@typescript-eslint/eslint-plugin": "^5.26.0",
+        "@typescript-eslint/parser": "^5.26.0",
+        "@vitejs/plugin-react": "^1.3.2",
+        "eslint": "^8.16.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.30.0",
+        "eslint-plugin-react-hooks": "^4.5.0",
+        "pre-commit": "^1.2.2",
+        "prettier": "^2.6.2",
+        "typescript": "^4.7.2",
+        "vite": "^2.9.9"
+    },
+    "pre-commit": "lint"
 }
