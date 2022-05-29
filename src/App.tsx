@@ -1,12 +1,12 @@
-import Input from "./components/Input/Input"
+import Input from './components/Input/Input';
 
 function App() {
-  return (
-    <section>
-      <h1>Encurtador</h1>
-      <Input />
-    </section>
-  )
+    return (
+        <section>
+            <h1>Encurtador</h1>
+            <Input />
+        </section>
+    );
 }
 
-export default App
+export default App;
