@@ -9,7 +9,7 @@
         "lint:format": "prettier  --loglevel warn --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
         "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
         "lint": "npm run lint:format && npm run lint:fix ",
-        "type-check": "tsc"
+        "prepare": "husky install"
     },
     "dependencies": {
         "react": "^18.1.0",
@@ -26,6 +26,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.30.0",
         "eslint-plugin-react-hooks": "^4.5.0",
+        "husky": "^8.0.1",
         "pre-commit": "^1.2.2",
         "prettier": "^2.6.2",
         "typescript": "^4.7.2",
