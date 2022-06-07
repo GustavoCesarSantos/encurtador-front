@@ -12,7 +12,7 @@ function App() {
 
 const Div = styled.div`
     height: 100vh;
-    padding-top: 200px;
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;

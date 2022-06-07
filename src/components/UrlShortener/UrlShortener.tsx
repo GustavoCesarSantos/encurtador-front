@@ -46,8 +46,7 @@ function UrlShortener() {
 const InputUrlShortener = styled.input`
     width: 530px;
     height: 50px;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 0px 1em 0px 1em;
     border-width:0px;
     border:none;
     border-radius: 10px 0px 0px 10px;
