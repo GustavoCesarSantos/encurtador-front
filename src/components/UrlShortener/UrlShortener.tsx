@@ -35,10 +35,10 @@ function UrlShortener() {
                 />
                 <ButtonUrlShortener onClick={shortenUrl}>encurtar</ButtonUrlShortener>
             </div>
-            <ShortenedUrl value={link} />
-            {/* <a href={link} target="_blank" rel="noreferrer">
-                go to
-            </a> */}
+            <ShortenedUrl>
+                <p>{link}</p>
+                <button onClick={() => navigator.clipboard.writeText(link)}>Copy Text</button>
+            </ShortenedUrl>
         </section>
     );
 }
@@ -67,7 +67,8 @@ const ButtonUrlShortener = styled.button`
     font-family: "Roboto Mono", sans-serif;
 `;
 
-const ShortenedUrl = styled.input`
+const ShortenedUrl = styled.div`
+    display: flex;
     width: 698px;
     height: 75px;
     margin-top: 25px;
@@ -77,7 +78,7 @@ const ShortenedUrl = styled.input`
     outline: none;
     font-size: 24px;
     font-family: "Roboto Mono", sans-serif;
-    text-align: center;
+    background-color: #ffffff;
 `;
 
 export default UrlShortener;
