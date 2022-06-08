@@ -20,7 +20,7 @@ function UrlShortener() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ url }),
         };
-        fetch('http://localhost:3001/v1/', requestOptions)
+        fetch(`${import.meta.env.VITE_BASE_URL}/shortenedUrls`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 createLink(data.url);
