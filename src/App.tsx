@@ -4,7 +4,7 @@ import UrlShortener from './components/UrlShortener/UrlShortener';
 function App() {
     return (
         <Div>
-            <MainTitle>Curtinhas</MainTitle>
+            <MainTitle>5Bits</MainTitle>
             <UrlShortener />
         </Div>
     );
@@ -17,14 +17,15 @@ const Div = styled.div`
     flex-direction: column;
     align-items: center;
     font-family: "Roboto Mono", sans-serif;
-    background-color: #d9d9d9;
+    background-color: #F2F2F1;
 `;
 
 const MainTitle = styled.h1`
     margin-bottom: 175px;
     font-size: 96px;
     font-weight: bold;
-    text-align: center
+    text-align: center;
+    color: #306CC7;
 `;
 
 export default App;
