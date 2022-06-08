@@ -2,11 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 function UrlShortener() {
-    let url = '';
+    const [url, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
+    const [copyButtonText, setCopyButtonText] = useState<string>('copiar');
 
     function handleInput(value: string) {
-        url = value;
+        setUrl(value);
     }
 
     function createLink(link: string) {
@@ -26,6 +27,12 @@ function UrlShortener() {
             });
     }
 
+    function copyText() {
+        navigator.clipboard.writeText(link);
+        setCopyButtonText('copiado!');
+        setTimeout(() => setCopyButtonText('copiar'), 300);
+    }
+
     return (
         <section>
             <div>
@@ -37,7 +44,7 @@ function UrlShortener() {
             </div>
             <ShortenedUrl>
                 <p>{link}</p>
-                <button onClick={() => navigator.clipboard.writeText(link)}>Copy Text</button>
+                {link && <CopyButton onClick={copyText}>{copyButtonText}</CopyButton>}
             </ShortenedUrl>
         </section>
     );
@@ -65,13 +72,18 @@ const ButtonUrlShortener = styled.button`
     outline: none;
     font-size: 20px;
     font-family: "Roboto Mono", sans-serif;
+    color: #ffffff;
+    background-color: #306CC7;
 `;
 
 const ShortenedUrl = styled.div`
     display: flex;
-    width: 698px;
-    height: 75px;
+    justify-content: space-between;
+    align-items: center;
+    width: 652px;
+    height: 100px;
     margin-top: 25px;
+    padding: 0px 1em 0px 1em;
     border-width:0px;
     border:none;
     border-radius: 10px;
@@ -79,6 +91,20 @@ const ShortenedUrl = styled.div`
     font-size: 24px;
     font-family: "Roboto Mono", sans-serif;
     background-color: #ffffff;
+`;
+
+const CopyButton = styled.button`
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    border: 3px dashed;
+    border-radius: 10px;
+    background-color: #ffffff;
+
+    &:hover {
+        color: rgba(48, 108, 199, 1);
+        border-color: rgba(48, 108, 199, 1);
+    }
 `;
 
 export default UrlShortener;
