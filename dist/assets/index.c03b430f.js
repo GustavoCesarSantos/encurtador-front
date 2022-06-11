@@ -68,7 +68,7 @@ Error generating stack: `+o.message+`
  */var Um=W.exports,Bm=Symbol.for("react.element"),Vm=Symbol.for("react.fragment"),Hm=Object.prototype.hasOwnProperty,Wm=Um.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,Qm={key:!0,ref:!0,__self:!0,__source:!0};function qf(e,t,n){var r,l={},o=null,i=null;n!==void 0&&(o=""+n),t.key!==void 0&&(o=""+t.key),t.ref!==void 0&&(i=t.ref);for(r in t)Hm.call(t,r)&&!Qm.hasOwnProperty(r)&&(l[r]=t[r]);if(e&&e.defaultProps)for(r in t=e.defaultProps,t)l[r]===void 0&&(l[r]=t[r]);return{$$typeof:Bm,type:e,key:o,ref:i,props:l,_owner:Wm.current}}ko.Fragment=Vm;ko.jsx=qf;ko.jsxs=qf;bu.exports=ko;const Ze=bu.exports.jsx,hr=bu.exports.jsxs;function Ym(){const[e,t]=W.exports.useState(""),[n,r]=W.exports.useState(""),[l,o]=W.exports.useState("copiar");function i(h){t(h)}function u(h){r(h)}function s(){const h={method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:e})};fetch("https://fivebits-api.herokuapp.com/v1/shortenedUrls",h).then(v=>v.json()).then(v=>{u(v.url)})}function c(){navigator.clipboard.writeText(n),o("copiado!"),setTimeout(()=>o("copiar"),300)}return hr("section",{children:[hr("div",{children:[Ze(Gm,{type:"text",onChange:h=>i(h.target.value)}),Ze(Km,{onClick:s,children:"encurtar"})]}),hr(Xm,{children:[Ze("p",{children:n}),n&&Ze(Zm,{onClick:c,children:l})]})]})}const Gm=Vn.input`
     width: 530px;
     height: 50px;
-    padding: 0px 1em 0px 1em;
+    padding: 0px 1em;
     border-width:0px;
     border:none;
     border-radius: 10px 0px 0px 10px;
@@ -96,7 +96,7 @@ Error generating stack: `+o.message+`
     margin-top: 25px;
     padding: 0px 1em 0px 1em;
     border-width:0px;
-    border:none;
+    border: none;
     border-radius: 10px;
     outline: none;
     font-size: 24px;
@@ -121,9 +121,9 @@ Error generating stack: `+o.message+`
     flex-direction: column;
     align-items: center;
     font-family: "Roboto Mono", sans-serif;
-    background-color: #F2F2F1;
+    background-color: #E1E1E1;
 `,bm=Vn.h1`
-    margin-bottom: 175px;
+    margin-bottom: 100px;
     font-size: 96px;
     font-weight: bold;
     text-align: center;
