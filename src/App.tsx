@@ -17,11 +17,11 @@ const Div = styled.div`
     flex-direction: column;
     align-items: center;
     font-family: "Roboto Mono", sans-serif;
-    background-color: #F2F2F1;
+    background-color: #E1E1E1;
 `;
 
 const MainTitle = styled.h1`
-    margin-bottom: 175px;
+    margin-bottom: 100px;
     font-size: 96px;
     font-weight: bold;
     text-align: center;

@@ -53,7 +53,7 @@ function UrlShortener() {
 const InputUrlShortener = styled.input`
     width: 530px;
     height: 50px;
-    padding: 0px 1em 0px 1em;
+    padding: 0px 1em;
     border-width:0px;
     border:none;
     border-radius: 10px 0px 0px 10px;
@@ -85,7 +85,7 @@ const ShortenedUrl = styled.div`
     margin-top: 25px;
     padding: 0px 1em 0px 1em;
     border-width:0px;
-    border:none;
+    border: none;
     border-radius: 10px;
     outline: none;
     font-size: 24px;
