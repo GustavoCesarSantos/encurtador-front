@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 function UrlShortener() {
-    const [url, setUrl] = useState<string>('');
+    const [originalUrl, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
     const [copyButtonText, setCopyButtonText] = useState<string>('copiar');
 
@@ -17,20 +17,25 @@ function UrlShortener() {
     function shortenUrl() {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url }),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization:
+                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJkZXZAZGV2LmNvbSIsInZlcnNpb24iOjEwLCJpYXQiOjE3Mjk4MzIyMzksImV4cCI6MTcyOTgzMzEzOX0.fOr8LNs4oHlg_EJ8yvXDD4J7p_4MMCwgQ8wFjAZ1ejA',
+            },
+            body: JSON.stringify({ originalUrl }),
         };
         fetch(`${import.meta.env.VITE_BASE_URL}/shortenedUrls`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                createLink(data.url);
+                createLink(`http://127.0.0.1:5173/${data.code}`);
             });
     }
 
     function copyText() {
         navigator.clipboard.writeText(link);
         setCopyButtonText('copiado!');
-        setTimeout(() => setCopyButtonText('copiar'), 300);
+        setTimeout(() => setCopyButtonText('copiar'), 500);
     }
 
     return (
@@ -58,7 +63,7 @@ const InputUrlShortener = styled.input`
     border:none;
     border-radius: 10px 0px 0px 10px;
     outline: none;
-    font-size: 20px;
+    font-size: 14px;
     font-family: "Roboto Mono", sans-serif;
 `;
 

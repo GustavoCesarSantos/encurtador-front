@@ -10,7 +10,7 @@ function Redirect() {
         };
         fetch(`${import.meta.env.VITE_BASE_URL}/shortenedUrls/${params.code}`, requestOptions)
             .then((response) => response.json())
-            .then((data) => (window.location.href = data.rootUrl));
+            .then((data) => (window.location.href = data.originalUrl));
     }, []);
 
     return <p>Estamos te redirecionando...</p>;
