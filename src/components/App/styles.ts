@@ -21,4 +21,4 @@ export const MainTitle = styled.h1`
 export const MainSubtitle = styled.span`
   color: #4A4A4A; 
   font-size: 1rem;
-`;  
+`;

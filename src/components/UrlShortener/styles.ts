@@ -5,7 +5,7 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 20px;
-`
+`;
 
 export const InputUrlShortener = styled.input`
     width: 530px;
