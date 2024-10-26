@@ -1,7 +1,9 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
+
 import { variables } from '../../shared/variables';
 
-const Redirect = () => {
+const Redirect: React.FC = () => {
     const params = useParams();
 
     const requestOptions = {
@@ -9,7 +11,8 @@ const Redirect = () => {
     };
     fetch(`${variables.apiUrl}/shortenedUrls/${params.code}`, requestOptions)
         .then((response) => response.json())
-        .then((data) => (window.location.href = data.originalUrl));
+        .then((data) => (window.location.href = data.originalUrl))
+        .catch((error) => console.error(error));
 
     return <p>Estamos te redirecionando...</p>;
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { variables } from '../../shared/variables';
 import {
@@ -9,7 +9,7 @@ import {
     ShortenedUrl,
 } from './styles';
 
-const UrlShortener = () => {
+const UrlShortener: React.FC = () => {
     const [originalUrl, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
     const [copyButtonText, setCopyButtonText] = useState<string>('copiar');
@@ -23,13 +23,13 @@ const UrlShortener = () => {
     }
 
     function shortenUrl() {
+        const token = localStorage.getItem('token');
         const requestOptions = {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJkZXZAZGV2LmNvbSIsInZlcnNpb24iOjExLCJpYXQiOjE3Mjk5MTQ3NzMsImV4cCI6MTcyOTkxNTY3M30.gQNYHGtv1pve0g6TTFHnd92YxQMO892DZ7iIZscD9i4',
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ originalUrl }),
         };
@@ -37,7 +37,8 @@ const UrlShortener = () => {
             .then((response) => response.json())
             .then((data) => {
                 createLink(`${variables.domainUrl}/${data.code}`);
-            });
+            })
+            .catch((error) => console.error(error));
     }
 
     function copyText() {
