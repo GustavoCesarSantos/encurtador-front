@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const RootContainer = styled.div`
     height: 100vh;
     min-height: 100vh;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-family: "Roboto Mono", sans-serif;
     background-color: #F5F5F5;
 `;

@@ -52,13 +52,13 @@ export const ShortenedUrl = styled.div`
     height: 100px;
     margin-top: 25px;
     padding: 0px 1em 0px 1em;
-    border-width:0px;
-    border: none;
-    border-radius: 10px;
     outline: none;
     font-size: 24px;
     font-family: "Roboto Mono", sans-serif;
-    background-color: #ffffff;
+    border: 1px solid #B0B0B0;
+    border-radius: 6px 0px 0px 6px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
 `;
 
 export const CopyButton = styled.button`

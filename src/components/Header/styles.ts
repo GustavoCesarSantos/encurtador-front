@@ -6,18 +6,17 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: ${colors.primary};
-  color: ${colors.buttonText};
+  padding: 1rem;
+    color: #0056D2;
   position: fixed;
   top: 0;
   width: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #0056D2;;
 `;
 
 export const Logo = styled.h1`
   font-size: 1.5rem;
-  color: ${colors.buttonText};
+    color: #0056D2;
   cursor: pointer;
 `;
 
@@ -39,8 +38,9 @@ export const Button = styled.button<ButtonProps>`
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
+    transition: background-color 0.3s;
 
-  &:hover {
-    background-color: ${colors.primary};
-  }
+    &:hover {
+        background-color: #0062C4;
+    }
 `;

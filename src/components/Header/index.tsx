@@ -1,29 +1,50 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { variables } from '../../shared/variables';
 import { Button, HeaderContainer, Logo, Nav } from './styles';
 
 interface HeaderProps {
     isLoggedIn: boolean;
     onLogoutClick: () => void;
+    onOpenLoginModal: () => void;
+    onOpenRegisterUserModal: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLogoutClick }) => {
+export const Header: React.FC<HeaderProps> = ({
+    isLoggedIn,
+    onLogoutClick,
+    onOpenLoginModal,
+    onOpenRegisterUserModal,
+}) => {
     const navigate = useNavigate();
 
-    const handleLoginClick = () => navigate('/login');
     const handleRegisterClick = () => navigate('/register');
+
+    const handleLogout = async () => {
+        const token = localStorage.getItem('token');
+
+        fetch(`${variables.apiUrl}/auth/signout`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(() => onLogoutClick())
+            .catch((error) => console.error(error));
+    };
 
     return (
         <HeaderContainer>
-            <Logo>URL Encurtador</Logo>
+            <Logo>5Bits</Logo>
             <Nav>
                 {isLoggedIn ? (
-                    <Button onClick={onLogoutClick}>Logout</Button>
+                    <Button onClick={handleLogout}>Logout</Button>
                 ) : (
                     <>
-                        <Button onClick={handleLoginClick}>Login</Button>
-                        <Button onClick={handleRegisterClick}>Cadastro</Button>
+                        <Button onClick={onOpenLoginModal}>Login</Button>
+                        <Button onClick={onOpenRegisterUserModal}>Cadastro</Button>
                     </>
                 )}
             </Nav>

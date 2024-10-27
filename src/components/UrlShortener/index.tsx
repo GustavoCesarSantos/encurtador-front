@@ -52,7 +52,7 @@ const UrlShortener: React.FC = () => {
             <Container>
                 <InputUrlShortener
                     type="text"
-                    placeholder="Cole sua URL longa aqui e deixe-a pronta para compartilhar!"
+                    placeholder="Cole sua URL longa aqui!"
                     onChange={(event) => handleInput(event.target.value)}
                 />
                 <ButtonUrlShortener onClick={shortenUrl}>encurtar</ButtonUrlShortener>
