@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { AuthService } from '../../shared/services/authService';
 import { variables } from '../../shared/variables';
 import {
     ButtonUrlShortener,
@@ -23,13 +24,15 @@ const UrlShortener: React.FC = () => {
     }
 
     function shortenUrl() {
-        const token = localStorage.getItem('token');
+        const { accessToken } = AuthService.getTokens();
         const requestOptions = {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${
+                    !accessToken || accessToken === '' ? 'INTERNAL' : accessToken
+                }`,
             },
             body: JSON.stringify({ originalUrl }),
         };

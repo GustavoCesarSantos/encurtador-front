@@ -1,9 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm';
 import { variables } from '../../shared/variables';
 import { ModalContainer, ModalContent } from './styles';
+import { AuthService } from '../../shared/services/authService';
 
 type LoginForm = { email: string; password: string };
 
@@ -21,7 +21,7 @@ export const Login: React.FC<ModalProps> = ({ onLogin, onClose }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                localStorage.setItem('token', data.accessToken);
+                AuthService.setTokens(data);
                 onLogin();
                 onClose();
             })

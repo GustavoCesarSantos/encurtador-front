@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthService } from '../../shared/services/authService';
 
 import { variables } from '../../shared/variables';
 import { Button, HeaderContainer, Logo, Nav } from './styles';
@@ -17,17 +18,14 @@ export const Header: React.FC<HeaderProps> = ({
     onOpenLoginModal,
     onOpenRegisterUserModal,
 }) => {
-    const navigate = useNavigate();
-
-    const handleRegisterClick = () => navigate('/register');
-
     const handleLogout = async () => {
-        const token = localStorage.getItem('token');
+        const { accessToken } = AuthService.getTokens();
+        AuthService.clearTokens();
 
         fetch(`${variables.apiUrl}/auth/signout`, {
             method: 'POST',
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             },
         })
@@ -40,11 +38,11 @@ export const Header: React.FC<HeaderProps> = ({
             <Logo>5Bits</Logo>
             <Nav>
                 {isLoggedIn ? (
-                    <Button onClick={handleLogout}>Logout</Button>
+                    <Button onClick={handleLogout}>Sair</Button>
                 ) : (
                     <>
-                        <Button onClick={onOpenLoginModal}>Login</Button>
-                        <Button onClick={onOpenRegisterUserModal}>Cadastro</Button>
+                        <Button onClick={onOpenLoginModal}>Entrar</Button>
+                        <Button onClick={onOpenRegisterUserModal}>Cadastrar</Button>
                     </>
                 )}
             </Nav>

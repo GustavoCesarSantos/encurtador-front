@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { Button, Input } from './styles';
 
 interface AuthFormProps {
@@ -19,7 +20,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSubmit, isRegister = false
     };
 
     return (
-        <form onSubmit={handleSubmit} aria-label={isRegister ? 'Cadastro' : 'Login'}>
+        <form onSubmit={handleSubmit} aria-label={isRegister ? 'Cadastro' : 'Entrar'}>
             {isRegister && (
                 <Input
                     type="text"
