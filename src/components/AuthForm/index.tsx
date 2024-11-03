@@ -20,12 +20,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSubmit, isRegister = false
     };
 
     return (
-        <form onSubmit={handleSubmit} aria-label={isRegister ? 'Cadastro' : 'Entrar'}>
+        <form onSubmit={handleSubmit} aria-label={isRegister ? 'Cadastro' : 'Login'}>
             {isRegister && (
                 <Input
                     type="text"
                     name="name"
-                    placeholder="Seu Nome"
+                    placeholder="Nome"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -35,7 +35,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSubmit, isRegister = false
             <Input
                 type="email"
                 name="email"
-                placeholder="Seu Melhor E-mail"
+                placeholder="E-mail"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -44,7 +44,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSubmit, isRegister = false
             <Input
                 type="password"
                 name="password"
-                placeholder="Senha Segura"
+                placeholder="Senha"
                 value={formData.password}
                 onChange={handleChange}
                 required

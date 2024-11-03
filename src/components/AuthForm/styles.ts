@@ -5,7 +5,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = styled.input<InputProps>`
   background-color: ${colors.inputBackground};
-  border: 1px solid ${colors.inputBorder};
+  border: 1px solid #B0B0B0;
   padding: 10px;
   font-size: 1rem;
   border-radius: 4px;
@@ -21,18 +21,13 @@ export const Input = styled.input<InputProps>`
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = styled.button<ButtonProps>`
-  background-color: ${colors.primary};
+  background: ${colors.buttonBackgroundColorHoover};
   color: ${colors.buttonText};
   padding: 12px;
   font-size: 1rem;
   font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 26px;
   cursor: pointer;
-  transition: background-color 0.3s;
   width: 100%;
-
-  &:hover {
-    background-color: ${colors.primary};
-  }
 `;
