@@ -8,7 +8,7 @@ import { App } from './components/App';
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />} />
+            <Route path="/teste" element={<App />} />
             <Route path="/:code" element={<Redirect />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
