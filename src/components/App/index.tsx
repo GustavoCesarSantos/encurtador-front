@@ -52,7 +52,9 @@ export const App: React.FC = () => {
                 <MainSubtitle>Encurte, Compartilhe, Acompanhe</MainSubtitle>
                 <UrlShortener />
             </ContentContainer>
-            <BugReportButton />
+            <footer>
+                <BugReportButton />
+            </footer>
             {isLoginModalOpen && <Login onLogin={handleLogin} onClose={handleCloseLoginModal} />}
             {isRegisterUserModalOpen && <RegisterUser onClose={handleCloseRegisterUserModal} />}
         </RootContainer>
