@@ -1,0 +1,20 @@
+# Permite que todos os bots indexem o site
+User-agent: *
+
+# Bloqueia o acesso a rotas sensíveis e específicas de backend que não devem ser indexadas
+Disallow: /dashboard
+Disallow: /settings
+Disallow: /api
+Disallow: /user
+Disallow: /auth
+
+# Permite acesso apenas à página inicial e a qualquer recurso público necessário
+Allow: /$
+Allow: /assets/
+Allow: /shorten
+
+# Links curtos gerados, como "/abcd123", podem ser indexados, então os permite
+Allow: /[a-zA-Z0-9]{6,}
+
+# Aponta para o sitemap para ajudar os motores de busca a indexar o conteúdo disponível
+Sitemap: https://www.seusite.com/sitemap.xml
