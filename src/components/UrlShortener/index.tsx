@@ -9,7 +9,7 @@ import {
     ShortenedUrl,
     ShortenerContainer,
 } from './styles';
-import { FloatingCopyButton } from '../Buttons/FloatingCopyButton';
+import { FloatingCopyButton } from '../Buttons/FloatingCopy';
 
 export const UrlShortener: React.FC = () => {
     const [originalUrl, setUrl] = useState<string>('');

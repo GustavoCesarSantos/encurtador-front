@@ -7,6 +7,7 @@ import { Login } from '../Login';
 import { RegisterUser } from '../RegisterUser';
 import { UrlShortener } from '../UrlShortener';
 import { MainSubtitle, MainTitle, RootContainer, ContentContainer } from './styles';
+import { BugReportButton } from '../Buttons/BugReport';
 
 export const App: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem(variables.accessToken));
@@ -51,6 +52,7 @@ export const App: React.FC = () => {
                 <MainSubtitle>Encurte, Compartilhe, Acompanhe</MainSubtitle>
                 <UrlShortener />
             </ContentContainer>
+            <BugReportButton />
             {isLoginModalOpen && <Login onLogin={handleLogin} onClose={handleCloseLoginModal} />}
             {isRegisterUserModalOpen && <RegisterUser onClose={handleCloseRegisterUserModal} />}
         </RootContainer>
