@@ -42,6 +42,7 @@ export const UrlShortener: React.FC = () => {
 
     const shortenUrl = async () => {
         try {
+            setLink('');
             let response = await fetchWithAuth();
             if (response.status === 429) throw new Error('Too many request');
             if (response.status === 401) {
