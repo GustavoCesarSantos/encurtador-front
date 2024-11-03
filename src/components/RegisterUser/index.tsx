@@ -4,7 +4,7 @@ import { AuthForm } from '../AuthForm';
 import { variables } from '../../shared/variables';
 import { ModalContainer, ModalContent } from './styles';
 
-type RegisterUserForm = { name: string; email: string; password: string };
+type RegisterUserForm = { name?: string; email: string; password: string };
 
 type ModalProps = {
     onClose: () => void;
