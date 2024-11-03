@@ -4,16 +4,16 @@ import { AuthService } from '../../shared/services/authService';
 import { variables } from '../../shared/variables';
 import {
     ButtonUrlShortener,
-    Container,
-    CopyButton,
+    InputShortenerContainer,
     InputUrlShortener,
     ShortenedUrl,
+    ShortenerContainer,
 } from './styles';
+import { FloatingCopyButton } from '../Buttons/FloatingCopyButton';
 
 export const UrlShortener: React.FC = () => {
     const [originalUrl, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
-    const [copyButtonText, setCopyButtonText] = useState<string>('copiar');
 
     const handleInput = (value: string) => {
         setUrl(value);
@@ -60,28 +60,22 @@ export const UrlShortener: React.FC = () => {
         }
     };
 
-    const copyText = () => {
-        navigator.clipboard.writeText(link);
-        setCopyButtonText('copiado!');
-        setTimeout(() => setCopyButtonText('copiar'), 500);
-    };
-
     return (
-        <section>
-            <Container>
+        <ShortenerContainer>
+            <InputShortenerContainer>
                 <InputUrlShortener
                     type="text"
                     placeholder="Cole sua URL longa aqui!"
                     onChange={(event) => handleInput(event.target.value)}
                 />
                 <ButtonUrlShortener onClick={shortenUrl}>encurtar</ButtonUrlShortener>
-            </Container>
+            </InputShortenerContainer>
             {link && (
                 <ShortenedUrl>
                     <p>{link}</p>
-                    <CopyButton onClick={copyText}>{copyButtonText}</CopyButton>
+                    <FloatingCopyButton textToCopy={link} />
                 </ShortenedUrl>
             )}
-        </section>
+        </ShortenerContainer>
     );
 };

@@ -1,11 +1,18 @@
 import styled from 'styled-components';
+
 import { colors } from '../../shared/colors';
 
-export const Container = styled.div`
+export const ShortenerContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 36px;
+`;
+
+export const InputShortenerContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
 `;
 
 export const InputUrlShortener = styled.input`
@@ -49,7 +56,7 @@ export const ShortenedUrl = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 652px;
+    width: 100%;
     height: 100px;
     margin-top: 25px;
     padding: 0px 1em 0px 1em;
@@ -57,21 +64,7 @@ export const ShortenedUrl = styled.div`
     font-size: 24px;
     font-family: "Roboto Mono", sans-serif;
     border: 1px solid #B0B0B0;
-    border-radius: 6px 0px 0px 6px;
+    border-radius: 6px;
     background-color: #FFFFFF;
     box-sizing: border-box;
-`;
-
-export const CopyButton = styled.button`
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 20px;
-    border: 3px dashed;
-    border-radius: 10px;
-    background-color: #ffffff;
-
-    &:hover {
-        color: rgba(48, 108, 199, 1);
-        border-color: rgba(48, 108, 199, 1);
-    }
 `;
