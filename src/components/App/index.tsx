@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
+import { AuthService } from '../../shared/services/authService';
+import { variables } from '../../shared/variables';
 import { Header } from '../Header';
 import { Login } from '../Login';
 import { RegisterUser } from '../RegisterUser';
-import UrlShortener from '../UrlShortener';
-import { MainSubtitle, MainTitle, RootContainer } from './styles';
+import { UrlShortener } from '../UrlShortener';
+import { MainSubtitle, MainTitle, RootContainer, ContentContainer } from './styles';
 
-const App: React.FC = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+export const App: React.FC = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem(variables.accessToken));
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isRegisterUserModalOpen, setIsRegisterUserModalOpen] = useState(false);
 
@@ -16,7 +18,7 @@ const App: React.FC = () => {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        AuthService.clearTokens();
         setIsLoggedIn(false);
     };
 
@@ -44,15 +46,13 @@ const App: React.FC = () => {
                 onOpenLoginModal={handleOpenLoginModal}
                 onOpenRegisterUserModal={handleOpenRegisterUserModal}
             />
-            <div>
+            <ContentContainer>
                 <MainTitle>5Bits</MainTitle>
-                <MainSubtitle>Encurte, compartilhe, acompanhe</MainSubtitle>
-            </div>
-            <UrlShortener />
+                <MainSubtitle>Encurte, Compartilhe, Acompanhe</MainSubtitle>
+                <UrlShortener />
+            </ContentContainer>
             {isLoginModalOpen && <Login onLogin={handleLogin} onClose={handleCloseLoginModal} />}
             {isRegisterUserModalOpen && <RegisterUser onClose={handleCloseRegisterUserModal} />}
         </RootContainer>
     );
 };
-
-export default App;

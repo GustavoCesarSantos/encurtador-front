@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { variables } from '../../shared/variables';
+import { LoadingRedirectPage } from '../LoadingRedirectPage';
 
 const Redirect: React.FC = () => {
     const params = useParams();
@@ -10,11 +11,14 @@ const Redirect: React.FC = () => {
         method: 'GET',
     };
     fetch(`${variables.apiUrl}/shortenedUrls/${params.code}`, requestOptions)
-        .then((response) => response.json())
+        .then((response) => {
+            if (response.status === 429) throw new Error('Too many request');
+            return response.json();
+        })
         .then((data) => (window.location.href = data.originalUrl))
         .catch((error) => console.error(error));
 
-    return <p>Estamos te redirecionando...</p>;
+    return <LoadingRedirectPage />;
 };
 
 export default Redirect;

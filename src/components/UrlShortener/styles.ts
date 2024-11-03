@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../shared/colors';
 
 export const Container = styled.div`
     display: flex;
@@ -35,12 +36,12 @@ export const ButtonUrlShortener = styled.button`
     font-size: 1rem;
     font-family: "Roboto Mono", sans-serif;
     font-weight: bold;
-    color: #FFFFFF;
-    background-color: #1E90FF;
+    color: ${colors.buttonColorMain};
+    background-color: ${colors.buttonBackgroundColorMain};
     transition: background-color 0.3s;
 
     &:hover {
-        background-color: #0062C4;
+        background-color: ${colors.buttonBackgroundColorHoover};
     }
 `;
 

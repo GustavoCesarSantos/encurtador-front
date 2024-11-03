@@ -24,7 +24,6 @@ export const RegisterUser: React.FC<ModalProps> = ({ onClose }) => {
     return (
         <ModalContainer onClick={onClose}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
-                <h1 id="register">Crie sua Conta</h1>
                 <AuthForm onSubmit={handleRegister} isRegister />
             </ModalContent>
         </ModalContainer>

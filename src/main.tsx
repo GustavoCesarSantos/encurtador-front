@@ -2,10 +2,8 @@ import './reset.css';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import App from './components/App';
 import Redirect from './components/Redirect';
-import { Login } from './components/Login';
-import { Register } from './components/RegisterUser';
+import { App } from './components/App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>

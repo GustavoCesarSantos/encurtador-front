@@ -14,24 +14,26 @@ type ModalProps = {
 
 export const Login: React.FC<ModalProps> = ({ onLogin, onClose }) => {
     const handleLogin = async (formData: LoginForm) => {
-        fetch(`${variables.apiUrl}/auth/signin`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                AuthService.setTokens(data);
-                onLogin();
-                onClose();
-            })
-            .catch((error) => console.error(error));
+        try {
+            const response = await fetch(`${variables.apiUrl}/auth/signin`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            if (response.status === 429) throw new Error('Too many request');
+            if (!response.ok) throw new Error('Failed to fetch login');
+            const data = await response.json();
+            AuthService.setTokens(data);
+            onLogin();
+            onClose();
+        } catch (error) {
+            console.error('Request failed', error);
+        }
     };
 
     return (
         <ModalContainer onClick={onClose}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
-                <h1 id="login">Entre na sua Conta</h1>
                 <AuthForm onSubmit={handleLogin} />
             </ModalContent>
         </ModalContainer>

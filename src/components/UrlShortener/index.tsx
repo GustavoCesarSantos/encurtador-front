@@ -10,21 +10,22 @@ import {
     ShortenedUrl,
 } from './styles';
 
-const UrlShortener: React.FC = () => {
+export const UrlShortener: React.FC = () => {
     const [originalUrl, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
     const [copyButtonText, setCopyButtonText] = useState<string>('copiar');
 
-    function handleInput(value: string) {
+    const handleInput = (value: string) => {
         setUrl(value);
-    }
+    };
 
-    function createLink(link: string) {
+    const createLink = (link: string) => {
         setLink(link);
-    }
+    };
 
-    function shortenUrl() {
+    const fetchWithAuth = async () => {
         const { accessToken } = AuthService.getTokens();
+        const url = `${variables.apiUrl}/shortenedUrls`;
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -36,19 +37,34 @@ const UrlShortener: React.FC = () => {
             },
             body: JSON.stringify({ originalUrl }),
         };
-        fetch(`${variables.apiUrl}/shortenedUrls`, requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                createLink(`${variables.domainUrl}/${data.code}`);
-            })
-            .catch((error) => console.error(error));
-    }
+        return await fetch(url, requestOptions);
+    };
 
-    function copyText() {
+    const shortenUrl = async () => {
+        try {
+            let response = await fetchWithAuth();
+            if (response.status === 429) throw new Error('Too many request');
+            if (response.status === 401) {
+                const refreshSuccess = await AuthService.refreshToken();
+                if (!refreshSuccess) {
+                    window.location.href = '/';
+                    throw new Error('Session expired');
+                }
+                response = await fetchWithAuth();
+            }
+            if (!response.ok) throw new Error('Failed to fetch short url');
+            const data = await response.json();
+            createLink(`${variables.domainUrl}/${data.code}`);
+        } catch (error) {
+            console.error('Request failed', error);
+        }
+    };
+
+    const copyText = () => {
         navigator.clipboard.writeText(link);
         setCopyButtonText('copiado!');
         setTimeout(() => setCopyButtonText('copiar'), 500);
-    }
+    };
 
     return (
         <section>
@@ -69,5 +85,3 @@ const UrlShortener: React.FC = () => {
         </section>
     );
 };
-
-export default UrlShortener;

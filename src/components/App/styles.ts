@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../shared/colors';
 
 export const RootContainer = styled.div`
     height: 100vh;
@@ -8,17 +9,24 @@ export const RootContainer = styled.div`
     align-items: center;
     justify-content: center;
     font-family: "Roboto Mono", sans-serif;
-    background-color: #F5F5F5;
+    background-color: ${colors.backgroundMain};
 `;
+
+export const ContentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 
 export const MainTitle = styled.h1`
     font-size: 7rem;
     font-weight: bold;
     text-align: center;
-    color: #0056D2;
+    color: ${colors.logoMain};
 `;
 
 export const MainSubtitle = styled.span`
-  color: #4A4A4A; 
+  color: ${colors.logoSecondary};
   font-size: 1rem;
+  font-weight: 500;
 `;

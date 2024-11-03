@@ -1,9 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthService } from '../../shared/services/authService';
 
+import { AuthService } from '../../shared/services/authService';
 import { variables } from '../../shared/variables';
-import { Button, HeaderContainer, Logo, Nav } from './styles';
+import {
+    LoginButton,
+    RegisterButton,
+    HeaderContainer,
+    Logo,
+    LogoutButton,
+    DividerContainer,
+    ButtonsContainer,
+} from './styles';
 
 interface HeaderProps {
     isLoggedIn: boolean;
@@ -36,16 +43,19 @@ export const Header: React.FC<HeaderProps> = ({
     return (
         <HeaderContainer>
             <Logo>5Bits</Logo>
-            <Nav>
+            <ButtonsContainer>
                 {isLoggedIn ? (
-                    <Button onClick={handleLogout}>Sair</Button>
+                    <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
                 ) : (
                     <>
-                        <Button onClick={onOpenLoginModal}>Entrar</Button>
-                        <Button onClick={onOpenRegisterUserModal}>Cadastrar</Button>
+                        <LoginButton onClick={onOpenLoginModal}>Entrar</LoginButton>
+                        <DividerContainer>|</DividerContainer>
+                        <RegisterButton onClick={onOpenRegisterUserModal}>
+                            Cadastrar-se
+                        </RegisterButton>
                     </>
                 )}
-            </Nav>
+            </ButtonsContainer>
         </HeaderContainer>
     );
 };
