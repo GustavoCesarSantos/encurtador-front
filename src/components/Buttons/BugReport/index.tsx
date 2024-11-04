@@ -14,6 +14,7 @@ import {
     ModalTitle,
     TextArea,
 } from './styles';
+import { variables } from '../../../shared/variables';
 
 interface BugReportData {
     email: string;
@@ -27,21 +28,28 @@ export const BugReportButton = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        const bugReport: BugReportData = {
-            email,
-            description,
-        };
-
         try {
-            console.log('Bug report:', bugReport);
+            const bugReport: BugReportData = {
+                email,
+                description,
+            };
+            const url = `${variables.apiUrl}/bugReports`;
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bugReport),
+            };
+            const response = await fetch(url, requestOptions);
+            if (response.status === 429) throw new Error('Too many request');
+            if (!response.ok) throw new Error('Failed to fetch short url');
             setEmail('');
             setDescription('');
             setIsOpen(false);
-            alert('Relatório de bug enviado com sucesso!');
         } catch (error) {
-            console.error('Erro ao enviar relatório:', error);
-            alert('Erro ao enviar relatório. Tente novamente.');
+            console.error('Request failed', error);
         }
     };
 
