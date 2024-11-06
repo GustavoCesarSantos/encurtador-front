@@ -1,3 +1,4 @@
+import { Loader } from 'lucide-react';
 import React, { useState } from 'react';
 
 import { Button, Input } from './styles';
@@ -5,9 +6,14 @@ import { Button, Input } from './styles';
 interface AuthFormProps {
     onSubmit: (formData: { name?: string; email: string; password: string }) => void;
     isRegister?: boolean;
+    isLoading: boolean;
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({ onSubmit, isRegister = false }) => {
+export const AuthForm: React.FC<AuthFormProps> = ({
+    onSubmit,
+    isRegister = false,
+    isLoading = false,
+}) => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +56,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSubmit, isRegister = false
                 required
                 aria-label="Senha"
             />
-            <Button type="submit">{isRegister ? 'Cadastrar' : 'Entrar'}</Button>
+            <Button type="submit">
+                {isLoading ? <Loader /> : isRegister ? 'Cadastrar' : 'Entrar'}
+            </Button>
         </form>
     );
 };

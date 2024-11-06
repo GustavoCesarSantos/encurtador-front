@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { AuthForm } from '../AuthForm';
 import { variables } from '../../shared/variables';
@@ -13,8 +13,11 @@ type ModalProps = {
 };
 
 export const Login: React.FC<ModalProps> = ({ onLogin, onClose }) => {
+    const [isLoading, setLoading] = useState<boolean>(false);
+
     const handleLogin = async (formData: LoginForm) => {
         try {
+            setLoading(true);
             const response = await fetch(`${variables.apiUrl}/auth/signin`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -24,17 +27,19 @@ export const Login: React.FC<ModalProps> = ({ onLogin, onClose }) => {
             if (!response.ok) throw new Error('Failed to fetch login');
             const data = await response.json();
             AuthService.setTokens(data);
+            setLoading(false);
             onLogin();
             onClose();
         } catch (error) {
             console.error('Request failed', error);
+            setLoading(false);
         }
     };
 
     return (
         <ModalContainer onClick={onClose}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
-                <AuthForm onSubmit={handleLogin} />
+                <AuthForm onSubmit={handleLogin} isLoading={isLoading} />
             </ModalContent>
         </ModalContainer>
     );

@@ -33,8 +33,7 @@ export const FloatingButton = styled.button`
 export const Tooltip = styled.span`
   position: absolute;
   top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: -50%;
   background: #608BC1;
   color: white;
   padding: 4px 8px;

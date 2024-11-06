@@ -10,10 +10,12 @@ import {
     ShortenerContainer,
 } from './styles';
 import { FloatingCopyButton } from '../Buttons/FloatingCopy';
+import { Loader } from 'lucide-react';
 
 export const UrlShortener: React.FC = () => {
     const [originalUrl, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     const handleInput = (value: string) => {
         setUrl(value);
@@ -42,6 +44,7 @@ export const UrlShortener: React.FC = () => {
 
     const shortenUrl = async () => {
         try {
+            setLoading(true);
             setLink('');
             let response = await fetchWithAuth();
             if (response.status === 429) throw new Error('Too many request');
@@ -56,8 +59,10 @@ export const UrlShortener: React.FC = () => {
             if (!response.ok) throw new Error('Failed to fetch short url');
             const data = await response.json();
             createLink(`${variables.domainUrl}/${data.code}`);
+            setLoading(false);
         } catch (error) {
             console.error('Request failed', error);
+            setLoading(false);
         }
     };
 
@@ -69,7 +74,9 @@ export const UrlShortener: React.FC = () => {
                     placeholder="Cole sua URL longa aqui!"
                     onChange={(event) => handleInput(event.target.value)}
                 />
-                <ButtonUrlShortener onClick={shortenUrl}>encurtar</ButtonUrlShortener>
+                <ButtonUrlShortener onClick={shortenUrl}>
+                    {isLoading ? <Loader /> : <>encurtar</>}
+                </ButtonUrlShortener>
             </InputShortenerContainer>
             {link && (
                 <ShortenedUrl>
