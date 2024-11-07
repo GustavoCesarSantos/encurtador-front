@@ -8,6 +8,7 @@ import { RegisterUser } from '../RegisterUser';
 import { UrlShortener } from '../UrlShortener';
 import { MainSubtitle, MainTitle, RootContainer, ContentContainer } from './styles';
 import { BugReportButton } from '../Buttons/BugReport';
+import { Sidebar } from '../Sidebar';
 
 export const App: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem(variables.accessToken));
@@ -47,6 +48,7 @@ export const App: React.FC = () => {
                 onOpenLoginModal={handleOpenLoginModal}
                 onOpenRegisterUserModal={handleOpenRegisterUserModal}
             />
+            {isLoggedIn ? <Sidebar /> : <></>}
             <ContentContainer>
                 <MainTitle>5Bits</MainTitle>
                 <MainSubtitle>Encurte, Compartilhe, Acompanhe</MainSubtitle>

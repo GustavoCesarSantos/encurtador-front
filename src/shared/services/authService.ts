@@ -39,8 +39,8 @@ export class AuthService {
                 throw new Error('Failed to refresh token');
             }
 
-            const newTokens: AuthTokens = await response.json();
-            this.setTokens(newTokens);
+            const data = await response.json();
+            this.setTokens({ ...data, refreshToken });
             return true;
         } catch (error) {
             console.error('Error refreshing token:', error);

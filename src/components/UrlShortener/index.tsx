@@ -59,9 +59,9 @@ export const UrlShortener: React.FC = () => {
             if (!response.ok) throw new Error('Failed to fetch short url');
             const data = await response.json();
             createLink(`${variables.domainUrl}/${data.code}`);
-            setLoading(false);
         } catch (error) {
             console.error('Request failed', error);
+        } finally {
             setLoading(false);
         }
     };

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { variables } from '../../shared/variables';
 import { LoadingRedirectPage } from '../LoadingRedirectPage';
 
-const Redirect: React.FC = () => {
+export const Redirect: React.FC = () => {
     const params = useParams();
 
     const requestOptions = {
@@ -20,5 +20,3 @@ const Redirect: React.FC = () => {
 
     return <LoadingRedirectPage />;
 };
-
-export default Redirect;
