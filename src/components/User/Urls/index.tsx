@@ -21,7 +21,7 @@ import { AuthService } from '../../../shared/services/authService';
 interface UrlData {
     originalUrl: string;
     code: string;
-    accessCounter: number;
+    access: number;
     lastAccess: string;
     createdAt: string;
 }
@@ -135,7 +135,7 @@ export const UrlList: React.FC = () => {
                             <Td>
                                 <CounterWrapper>
                                     <Eye size={16} />
-                                    {url.accessCounter}
+                                    {url.access}
                                 </CounterWrapper>
                             </Td>
                             <Td>
