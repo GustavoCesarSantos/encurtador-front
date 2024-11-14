@@ -26,14 +26,10 @@ export const RegisterUser: React.FC<ModalProps> = ({ onClose }) => {
                 body: JSON.stringify(formData),
             });
             if (response.status === 429) {
-                const error = 'Failed to request, try again';
-                setError(error);
                 throw new Error('Too many request');
             }
             if (!response.ok) {
-                const error = 'Failed to fetch user register';
-                setError(error);
-                throw new Error(error);
+                throw new Error('Failed to fetch user register');
             }
             onClose();
         } catch (error) {

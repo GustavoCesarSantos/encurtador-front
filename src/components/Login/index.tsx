@@ -28,29 +28,23 @@ export const Login: React.FC<ModalProps> = ({ onLogin, onClose }) => {
                 body: JSON.stringify(formData),
             });
             if (response.status === 429) {
-                const error = 'Failed to request, try again';
-                setError(error);
                 throw new Error('Too many request');
             }
             if (response.status === 400) {
-                const error = 'Invalid Credentials';
-                setError(error);
-                throw new Error('Too many request');
+                throw new Error('Invalid Credentials');
             }
             if (!response.ok) {
-                const error = 'Failed to fetch login';
-                setError(error);
-                throw new Error(error);
+                throw new Error('Failed to fetch login');
             }
             const data = await response.json();
             AuthService.setTokens(data);
-            setLoading(false);
             onLogin();
             onClose();
         } catch (error) {
             setError((error as Error).message);
-            setLoading(false);
             console.error('Request failed', error);
+        } finally {
+            setLoading(false);
         }
     };
 

@@ -52,8 +52,6 @@ export const UrlShortener: React.FC = () => {
             setLink('');
             let response = await fetchWithAuth();
             if (response.status === 429) {
-                const error = 'Failed to request, try again';
-                setError(error);
                 throw new Error('Too many request');
             }
             if (response.status === 401) {
@@ -65,9 +63,7 @@ export const UrlShortener: React.FC = () => {
                 response = await fetchWithAuth();
             }
             if (!response.ok) {
-                const error = 'Failed to fetch short url';
-                setError(error);
-                throw new Error(error);
+                throw new Error('Failed to fetch short url');
             }
             const data = await response.json();
             createLink(`${variables.domainUrl}/${data.code}`);
