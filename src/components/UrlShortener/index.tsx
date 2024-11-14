@@ -11,11 +11,15 @@ import {
 } from './styles';
 import { FloatingCopyButton } from '../Buttons/FloatingCopy';
 import { Loader } from 'lucide-react';
+import { Notification } from '../../shared/components/Notification';
 
 export const UrlShortener: React.FC = () => {
     const [originalUrl, setUrl] = useState<string>('');
     const [link, setLink] = useState<string>('');
     const [isLoading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const closeNotification = () => setError(null);
 
     const handleInput = (value: string) => {
         setUrl(value);
@@ -47,7 +51,11 @@ export const UrlShortener: React.FC = () => {
             setLoading(true);
             setLink('');
             let response = await fetchWithAuth();
-            if (response.status === 429) throw new Error('Too many request');
+            if (response.status === 429) {
+                const error = 'Failed to request, try again';
+                setError(error);
+                throw new Error('Too many request');
+            }
             if (response.status === 401) {
                 const refreshSuccess = await AuthService.refreshToken();
                 if (!refreshSuccess) {
@@ -56,10 +64,15 @@ export const UrlShortener: React.FC = () => {
                 }
                 response = await fetchWithAuth();
             }
-            if (!response.ok) throw new Error('Failed to fetch short url');
+            if (!response.ok) {
+                const error = 'Failed to fetch short url';
+                setError(error);
+                throw new Error(error);
+            }
             const data = await response.json();
             createLink(`${variables.domainUrl}/${data.code}`);
         } catch (error) {
+            setError((error as Error).message);
             console.error('Request failed', error);
         } finally {
             setLoading(false);
@@ -84,6 +97,7 @@ export const UrlShortener: React.FC = () => {
                     <FloatingCopyButton textToCopy={link} />
                 </ShortenedUrl>
             )}
+            {error && <Notification message={error} onClose={closeNotification} />}
         </ShortenerContainer>
     );
 };
